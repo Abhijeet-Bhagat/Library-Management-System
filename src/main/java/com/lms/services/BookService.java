@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import javax.naming.Name;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -49,6 +50,8 @@ public class BookService {
                 return bookRepository.findByAuthor_Name(value);
             case GENRE:
                 return bookRepository.findByGenre(value);
+            case BOOK_ID:
+                return bookRepository.findAllById(Collections.singletonList(Integer.parseInt(value)));
             default:
                 return new ArrayList<>((Collection) Book.builder().name("Nothing").build());
         }

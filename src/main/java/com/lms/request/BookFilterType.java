@@ -3,5 +3,6 @@ package com.lms.request;
 public enum BookFilterType {
     NAME,
     AUTHOR,
-    GENRE
+    GENRE,
+    BOOK_ID
 }
