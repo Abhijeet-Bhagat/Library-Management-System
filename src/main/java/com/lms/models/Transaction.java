@@ -18,6 +18,8 @@ public class Transaction {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    private String externalTxnId;
+
     @Enumerated(value = EnumType.STRING)
     private TransactionType transactionType;
 
