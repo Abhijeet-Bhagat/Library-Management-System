@@ -1,7 +1,6 @@
 package com.lms.controller;
 
 import com.lms.BookSearchResponse;
-import com.lms.models.Book;
 import com.lms.request.BookCreateRequest;
 import com.lms.request.BookFilterType;
 import com.lms.services.BookService;
@@ -24,7 +23,7 @@ public class BookController {
 
     @PostMapping("/book")
     public void createBook(@Valid @RequestBody BookCreateRequest bookCreateRequest){ //@Valid annotation is required for the validations put in BookCreateRequest to work
-        bookService.createBook(bookCreateRequest);
+        bookService.createOrUpdateBook(bookCreateRequest);
         System.out.println("Book created successfully");
     }
 

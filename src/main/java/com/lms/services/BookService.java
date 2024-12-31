@@ -2,7 +2,6 @@ package com.lms.services;
 
 import com.lms.models.Author;
 import com.lms.models.Book;
-import com.lms.models.Genre;
 import com.lms.repository.AuthorRepository;
 import com.lms.repository.BookRepository;
 import com.lms.request.BookCreateRequest;
@@ -10,7 +9,6 @@ import com.lms.request.BookFilterType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.naming.Name;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -24,14 +22,19 @@ public class BookService {
 
     @Autowired
     AuthorRepository authorRepository;
-    public void createBook(BookCreateRequest bookCreateRequest){
+    public void createOrUpdateBook(BookCreateRequest bookCreateRequest){
 
         Book book = bookCreateRequest.to();
+
+        createOrUpdateBook(book);
+    }
+
+    public void createOrUpdateBook(Book book){
         Author author = book.getAuthor();
 
         //first check if the author exists in DB or not, if not then only save it
         Author authemail = authorRepository.findAuthorByEmail(author.getEmail());
-        System.out.println(authemail);
+        System.out.println("Author Email: " + (authemail != null ? authemail.getEmail() : "null"));
         Author authsaved;
         if(authemail == null){
             authsaved = authorRepository.save(author);
@@ -40,7 +43,6 @@ public class BookService {
         }
         bookRepository.save(book);
     }
-
     public List<Book> findBooks(BookFilterType bookFilterType, String value){
 
         switch (bookFilterType){

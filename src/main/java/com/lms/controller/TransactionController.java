@@ -14,9 +14,17 @@ public class TransactionController {
     TransactionService transactionService;
 
     @PostMapping("/transaction/issue")
-    public void issueTxn(@RequestParam("studentId") int studentId,
+    public String issueTxn(@RequestParam("studentId") int studentId,
                          @RequestParam("bookId") int bookId){
 
-        transactionService.issueTxn(studentId, bookId);
+       return transactionService.issueTxn(studentId, bookId);
     }
+
+    @PostMapping("/transaction/return")
+    public String returnTxn(@RequestParam("studentId") int studentId,
+                           @RequestParam("bookId") int bookId){
+
+        return transactionService.returnTxn(studentId, bookId);
+    }
+
 }
